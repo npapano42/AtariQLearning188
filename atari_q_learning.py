@@ -111,7 +111,7 @@ def epsilon_greedy(action, step):
         return action
 
 
-env = gym.make("SpaceInvaders-v0")
+env = gym.make("Breakout-v0")
 n_outputs = env.action_space.n
 tf.reset_default_graph()
 
@@ -151,8 +151,10 @@ with tf.Session() as session:
         actions_counter = Counter()
         episodic_loss = []
 
-        while not done:
+        print(i)
 
+        while not done:
+            
             env.render()
             obs = preprocess_image(obs)
             actions = main_dqn_outputs.eval(
@@ -184,6 +186,4 @@ with tf.Session() as session:
             obs = next_obs
             epoch += 1
             global_step += 1
-            episodic_reward += reward
-
             episodic_reward += reward
